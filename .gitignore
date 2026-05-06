@@ -1,19 +1,6 @@
-# Environment
-.venv/
-.env
-*.egg-info/
-
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.pytest_cache/
-*.egg
-
-# Flask
-instance/
-.webassets-cache
+# OS
+.DS_Store
+Thumbs.db
 
 # IDE
 .vscode/
@@ -21,10 +8,3 @@ instance/
 *.swp
 *.swo
 *~
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Project
-uv.lock
