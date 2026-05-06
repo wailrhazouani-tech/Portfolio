@@ -1,34 +1,28 @@
 # Wail Rhazouani Portfolio
 
-Static portfolio site hosted on GitHub Pages.
+A static portfolio website showcasing professional identity, bio, and work.
 
 ## View online
 
 https://wailrhazouani-tech.github.io/Portfolio/
 
-## Deployed
+## Site structure
 
-The site is a pure static website with HTML, CSS, and assets. It's automatically deployed to GitHub Pages from the `docs/` folder.
+- `index.html` — Home page with introduction and portrait
+- `bio.html` — About Wail Rhazouani
+- `portfolio.html` — Links to presentations, video, and professional profiles
+- `elevator-pitch.html` — Placeholder for future video
+- `css/` — Stylesheets
+- `assets/` — Images and PDFs
 
-## Structure
+## Deployment
 
-- **`docs/`** — Static website (deployed to GitHub Pages)
-  - `index.html` — Home page
-  - `bio.html` — Bio page
-  - `portfolio.html` — Portfolio page
-  - `elevator-pitch.html` — Elevator pitch placeholder
-  - `css/` — Stylesheets
-  - `assets/` — Images and PDFs
+The site is automatically deployed to GitHub Pages when you push to the `main` branch.
 
-## Pages
+To enable GitHub Pages:
+1. Go to repository **Settings** → **Pages**
+2. Set **Source** to `Deploy from a branch`
+3. Select `main` branch and root folder `/`
+4. Save
 
-- **Home** — Introduction with portrait and highlights
-- **Bio** — About Wail Rhazouani
-- **Portfolio** — Links to presentations, video, and profiles
-- **Elevator Pitch** — Placeholder for future video
-
-## Notes
-
-- No backend or server required
-- Fully static HTML/CSS deployed to GitHub Pages
-- Portrait image and PDF in `docs/assets/`
+Your site will be live at: https://wailrhazouani-tech.github.io/Portfolio/
