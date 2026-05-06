@@ -1,26 +1,38 @@
 # Wail Rhazouani Portfolio
 
-Minimal Flask portfolio site built with Python and managed with `uv`.
+Static portfolio site hosted on GitHub Pages.
 
-## Run locally
+## View online
+
+https://wailrhazouani-tech.github.io/Portfolio/
+
+## Local development
+
+To run locally:
 
 ```bash
 uv sync
 uv run python app.py
 ```
 
-Then open the local address shown in the terminal.
+Or simply open `docs/index.html` in a browser for the static version.
+
+## Structure
+
+- **`docs/`** — Static site (deployed to GitHub Pages)
+- **`static/`** — Original assets and stylesheets
+- **`templates/`** — Original Flask templates
+- **`app.py`** — Flask app (no longer used, kept for reference)
 
 ## Pages
 
 - Home
 - Bio
 - Portfolio
-- Elevator Pitch placeholder
+- Elevator Pitch (placeholder)
 
 ## Notes
 
-- The portfolio page uses the provided class links.
-- The portrait image and PDF live in `static/assets/`.
-- The portfolio page links directly to the local PDF asset.
-- The elevator pitch page is intentionally a placeholder until the final video is ready.
+- The static HTML is in the `docs/` folder and automatically served by GitHub Pages
+- The portrait image and PDF live in `docs/assets/`
+- All content is static HTML with no backend required
