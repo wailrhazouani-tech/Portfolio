@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-card">
+  <p class="eyebrow">Portfolio</p>
+  <h1>Selected links</h1>
+  <p class="intro">A concise hub for your presentation materials, professional profiles, and the PDF slot for your deck.</p>
+
+  <div class="portfolio-banner">
+    <div>
+      <span class="banner-label">Portfolio PDF</span>
+      <strong>Ready to open</strong>
+      <p>
+        The PDF from this folder is now wired to
+        <a href="{{ url_for('static', filename=site.portfolio_pdf) }}" target="_blank" rel="noreferrer">
+          the local PDF file
+        </a>.
+      </p>
+    </div>
+    <a class="button secondary" href="{{ url_for('static', filename=site.portfolio_pdf) }}" target="_blank" rel="noreferrer">Open PDF</a>
+  </div>
+
+  <div class="link-grid">
+    <a class="link-card primary-link" href="{{ site.portfolio_deck }}" target="_blank" rel="noreferrer">
+      <span>Portfolio deck</span>
+      <strong>Google Slides reference</strong>
+    </a>
+    <a class="link-card" href="{{ site.team_pitch_video }}" target="_blank" rel="noreferrer">
+      <span>Team pitch video</span>
+      <strong>YouTube presentation</strong>
+    </a>
+    <a class="link-card" href="{{ site.team_slides }}" target="_blank" rel="noreferrer">
+      <span>Team slides</span>
+      <strong>Presentation deck link</strong>
+    </a>
+    <a class="link-card" href="{{ site.linkedin }}" target="_blank" rel="noreferrer">
+      <span>LinkedIn</span>
+      <strong>Professional profile</strong>
+    </a>
+    <a class="link-card" href="{{ site.github }}" target="_blank" rel="noreferrer">
+      <span>GitHub</span>
+      <strong>Code and projects</strong>
+    </a>
+    <a class="link-card" href="{{ site.email }}">
+      <span>Email</span>
+      <strong>rhazouani1999@gmail.com</strong>
+    </a>
+  </div>
+
+  <div class="note-box">
+    <p>
+      The portfolio page now links directly to the local PDF in the assets folder.
+    </p>
+  </div>
+</section>
+{% endblock %}
