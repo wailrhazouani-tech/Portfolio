@@ -6,7 +6,7 @@
     <title>Elevator Pitch | Wail Rhazouani</title>
     <meta
       name="description"
-      content="Portfolio website for Wail Rhazouani, Data Engineering Student."
+      content="Elevator pitch page with video embed area and key takeaways about distributed data engineering and cloud systems."
     />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
@@ -26,26 +26,39 @@
           <a href="portfolio.html">Portfolio</a>
           <a class="active" href="elevator-pitch.html">Elevator Pitch</a>
         </nav>
+        <p class="topbar-meta">ALT+1..4 to navigate</p>
       </header>
 
       <main class="content-wrap">
-        <section class="page-card wide-card">
-  <p class="eyebrow">Elevator Pitch</p>
-  <h1>Video coming soon</h1>
-  <p class="intro">
-    This page is a placeholder for your elevator pitch video. The recording can be added in Week
-    12, once you are ready to upload it.
-  </p>
+        <section class="panel page-panel">
+          <p class="eyebrow">Elevator Pitch</p>
+          <h1>Concise story, measurable impact</h1>
+          <p class="summary">
+            This page is prepared for a Google Drive hosted pitch video and a compact summary of
+            what I deliver as a Data Engineering student.
+          </p>
 
-  <div class="placeholder-panel">
-    <h2>Planned content</h2>
-    <ul>
-      <li>A short recorded pitch</li>
-      <li>A clear summary of your skills and goals</li>
-      <li>A link to the final uploaded video</li>
-    </ul>
-  </div>
-</section>
+          <div class="pitch-layout">
+            <div class="video-shell" aria-label="Elevator pitch video">
+              <iframe
+                title="Elevator Pitch Video"
+                src="https://drive.google.com/file/d/REPLACE_WITH_VIDEO_ID/preview"
+                allow="autoplay"
+                loading="lazy"
+              ></iframe>
+            </div>
+
+            <aside class="key-points">
+              <h2>Key Takeaways</h2>
+              <ul>
+                <li>I engineer distributed systems for resilient, low-latency data flow.</li>
+                <li>My toolset centers on Kafka, Spark, Python, SQL, and cloud operations.</li>
+                <li>I prioritize minimalist architecture with clear reliability targets.</li>
+                <li>I am building technology paths that help reduce youth unemployment risk.</li>
+              </ul>
+            </aside>
+          </div>
+        </section>
       </main>
 
       <footer class="footer">
@@ -59,5 +72,6 @@
         </p>
       </footer>
     </div>
+    <script src="js/main.js"></script>
   </body>
 </html>

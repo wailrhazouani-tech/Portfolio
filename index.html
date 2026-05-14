@@ -6,7 +6,7 @@
     <title>Wail Rhazouani | Data Engineering Student</title>
     <meta
       name="description"
-      content="Portfolio website for Wail Rhazouani, Data Engineering Student."
+      content="Engineering Scalable Data Architectures - terminal-centric portfolio for a Data Engineering student focused on Big Data and Cloud systems."
     />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
@@ -26,59 +26,57 @@
           <a href="portfolio.html">Portfolio</a>
           <a href="elevator-pitch.html">Elevator Pitch</a>
         </nav>
+        <p class="topbar-meta">ALT+1..4 to navigate</p>
       </header>
 
       <main class="content-wrap">
-        <section class="hero">
-  <div class="hero-copy">
-    <p class="eyebrow">Portfolio / Data Engineering</p>
-    <h1>Wail Rhazouani</h1>
-    <p class="lede">Data Engineering Student</p>
-    <p class="intro">Building fast, reliable data platforms with a minimalist, terminal-first workflow. Focused on Kafka, Linux, and cloud-native systems that stay lean under pressure.</p>
+        <section class="hero-grid">
+          <article class="panel terminal-panel">
+            <div class="panel-head">
+              <span class="dot red"></span>
+              <span class="dot amber"></span>
+              <span class="dot green"></span>
+              <p>terminal://home</p>
+            </div>
+            <div class="panel-body">
+              <p class="eyebrow">Data Engineering Portfolio</p>
+              <h1>Engineering Scalable Data Architectures.</h1>
+              <p class="summary">
+                Information Technology and Data Engineering student specializing in distributed
+                systems and cloud infrastructure. Focused on building efficient, minimalist
+                solutions for the future of data.
+              </p>
+              <div class="actions">
+                <a class="button primary" href="portfolio.html">View My Projects</a>
+                <a class="button secondary" href="assets/portfolio.pdf" target="_blank" rel="noreferrer">Download Resume</a>
+              </div>
+              <ul class="inline-tags" aria-label="Focus areas">
+                <li>Apache Kafka</li>
+                <li>Apache Spark</li>
+                <li>Hadoop Ecosystems</li>
+                <li>Cloud Engineering</li>
+              </ul>
+            </div>
+          </article>
 
-    <div class="highlight-strip">
-      <span>Minimalist</span>
-      <span>Terminal-centric</span>
-      <span>Security-first</span>
-      <span>Real-time systems</span>
-    </div>
-
-    <div class="actions">
-      <a class="button primary" href="bio.html">View Bio</a>
-      <a class="button secondary" href="portfolio.html">View Portfolio</a>
-      <a class="button ghost" href="elevator-pitch.html">Elevator Pitch</a>
-    </div>
-
-    <div class="stats">
-      <article>
-        <strong>Kafka</strong>
-        <span>Real-time pipelines</span>
-      </article>
-      <article>
-        <strong>Linux</strong>
-        <span>Native workflow control</span>
-      </article>
-      <article>
-        <strong>Cloud</strong>
-        <span>Scalable architecture</span>
-      </article>
-    </div>
-  </div>
-
-  <aside class="portrait-card" aria-label="Portrait photo">
-    <div class="portrait-frame">
-      <img
-        class="portrait-photo"
-        src="assets/portrait.jpeg"
-        alt="Portrait of Wail Rhazouani"
-      />
-    </div>
-    <div class="portrait-meta">
-      <p><strong>Data engineering student and IT specialist</strong></p>
-      <p>Based in Rabat, Morocco and focused on high-efficiency data engineering.</p>
-    </div>
-  </aside>
-</section>
+          <aside class="panel identity-panel" aria-label="Profile and status">
+            <img class="portrait-photo" src="assets/portrait.jpeg" alt="Portrait of Wail Rhazouani" />
+            <div class="identity-copy">
+              <p class="status-line">STATUS: building real-time systems from Rabat, Morocco</p>
+              <p class="status-line">ENV: Fedora and Ubuntu, Hyprland-inspired workflow</p>
+            </div>
+            <div class="stat-grid">
+              <article>
+                <strong>Distributed First</strong>
+                <p>Designing event-driven pipelines that stay stable under load.</p>
+              </article>
+              <article>
+                <strong>Cloud Native</strong>
+                <p>Deploying practical data services with clear SLO boundaries.</p>
+              </article>
+            </div>
+          </aside>
+        </section>
       </main>
 
       <footer class="footer">
@@ -92,5 +90,6 @@
         </p>
       </footer>
     </div>
+    <script src="js/main.js"></script>
   </body>
 </html>

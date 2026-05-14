@@ -6,7 +6,7 @@
     <title>Portfolio | Wail Rhazouani</title>
     <meta
       name="description"
-      content="Portfolio website for Wail Rhazouani, Data Engineering Student."
+      content="Portfolio of Data Engineering projects featuring purpose, technical challenges, and practical solutions across Big Data and ML systems."
     />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
@@ -26,55 +26,68 @@
           <a class="active" href="portfolio.html">Portfolio</a>
           <a href="elevator-pitch.html">Elevator Pitch</a>
         </nav>
+        <p class="topbar-meta">ALT+1..4 to navigate</p>
       </header>
 
       <main class="content-wrap">
-        <section class="page-card">
-  <p class="eyebrow">Portfolio</p>
-  <h1>Selected links</h1>
-  <p class="intro">A concise hub for your presentation materials, professional profiles, and the PDF slot for your deck.</p>
+        <section class="stack-layout">
+          <article class="panel page-panel">
+            <p class="eyebrow">Portfolio / Power Five</p>
+            <h1>Top-tier projects built for data at scale</h1>
+            <p class="summary">
+              Each project below highlights the reason it exists, the hard technical constraints,
+              and the tool-specific solution used to make it production ready.
+            </p>
+          </article>
 
-  <div class="portfolio-banner">
-    <div>
-      <span class="banner-label">Portfolio PDF</span>
-      <strong>Ready to open</strong>
-      <p>
-        The PDF from this folder is now wired to
-        <a href="assets/portfolio.pdf" target="_blank" rel="noreferrer">
-          the local PDF file
-        </a>.
-      </p>
-    </div>
-    <a class="button secondary" href="assets/portfolio.pdf" target="_blank" rel="noreferrer">Open PDF</a>
-  </div>
+          <article class="panel project-card featured-project">
+            <h2>1) Full-Stack ML App - Streamlit + Scikit-learn</h2>
+            <p><strong>Purpose:</strong> Deliver an end-to-end prediction tool that turns model outputs into business-facing decisions.</p>
+            <p><strong>Challenges:</strong> Feature drift in live inputs, model versioning discipline, and keeping inference latency low in a lightweight UI stack.</p>
+            <p><strong>Solutions:</strong> Built a clean training pipeline in Scikit-learn, versioned artifacts, and deployed a Streamlit interface with validated feature schemas for stable real-time predictions.</p>
+          </article>
 
-  <div class="link-grid">
-    <a class="link-card primary-link" href="https://docs.google.com/presentation/d/15qpI1l8DgpzFjOaj4ubVf2BtOoXPmcxU/edit?usp=sharing&ouid=115643260947040219860&rtpof=true&sd=true" target="_blank" rel="noreferrer">
-      <span>Portfolio deck</span>
-      <strong>Google Slides reference</strong>
-    </a>
-    <a class="link-card" href="https://youtu.be/1UVudFblDCU" target="_blank" rel="noreferrer">
-      <span>Team pitch video</span>
-      <strong>YouTube presentation</strong>
-    </a>
-    <a class="link-card" href="https://docs.google.com/presentation/d/15qpI1l8DgpzFjOaj4ubVf2BtOoXPmcxU/edit?usp=sharing&ouid=115643260947040219860&rtpof=true&sd=true" target="_blank" rel="noreferrer">
-      <span>Team slides</span>
-      <strong>Presentation deck link</strong>
-    </a>
-    <a class="link-card" href="https://www.linkedin.com/in/wail-rhazouani/" target="_blank" rel="noreferrer">
-      <span>LinkedIn</span>
-      <strong>Professional profile</strong>
-    </a>
-    <a class="link-card" href="https://github.com/wailrhazouani-tech" target="_blank" rel="noreferrer">
-      <span>GitHub</span>
-      <strong>Code and projects</strong>
-    </a>
-    <a class="link-card" href="mailto:rhazouani1999@gmail.com">
-      <span>Email</span>
-      <strong>rhazouani1999@gmail.com</strong>
-    </a>
-  </div>
-</section>
+          <article class="panel project-card-grid">
+            <article class="project-card">
+              <h2>2) Kafka KRaft Event Pipeline</h2>
+              <p><strong>Purpose:</strong> Replace batch-heavy data flow with event streaming for faster operational decisions.</p>
+              <p><strong>Challenges:</strong> KRaft mode broker-controller configuration, partition strategy, and consumer lag during traffic spikes.</p>
+              <p><strong>Solutions:</strong> Tuned topic partitioning, applied idempotent producers, and used offset monitoring plus retry policies to maintain throughput consistency.</p>
+            </article>
+
+            <article class="project-card">
+              <h2>3) Spark ETL on Cloud Object Storage</h2>
+              <p><strong>Purpose:</strong> Normalize large, messy datasets into analytics-ready tables for reporting and ML.</p>
+              <p><strong>Challenges:</strong> Skewed joins, memory pressure, and long-running jobs on uneven partitions.</p>
+              <p><strong>Solutions:</strong> Applied repartitioning, caching strategy, and optimized Spark transformations with schema-first data contracts.</p>
+            </article>
+
+            <article class="project-card">
+              <h2>4) Hadoop Data Lake Foundation</h2>
+              <p><strong>Purpose:</strong> Create low-cost storage and historical retention for high-volume records.</p>
+              <p><strong>Challenges:</strong> Ingestion reliability, data quality checks, and maintaining query performance over growing archives.</p>
+              <p><strong>Solutions:</strong> Built staged ingestion layers with validation checkpoints and partition-aware organization for faster downstream access.</p>
+            </article>
+
+            <article class="project-card">
+              <h2>5) Cloud Monitoring and Reliability Dashboard</h2>
+              <p><strong>Purpose:</strong> Make data platform health visible through actionable reliability signals.</p>
+              <p><strong>Challenges:</strong> Alert noise, delayed incident detection, and unclear ownership during outages.</p>
+              <p><strong>Solutions:</strong> Defined SLI and SLO thresholds, grouped alerts by service criticality, and documented response runbooks to accelerate resolution.</p>
+            </article>
+          </article>
+
+          <article class="panel page-panel quick-links">
+            <h2>References</h2>
+            <p>
+              <a href="assets/portfolio.pdf" target="_blank" rel="noreferrer">Open Portfolio PDF</a>
+              <span>·</span>
+              <a href="https://github.com/wailrhazouani-tech" target="_blank" rel="noreferrer">GitHub Projects</a>
+              <span>·</span>
+              <a href="https://www.linkedin.com/in/wail-rhazouani/" target="_blank" rel="noreferrer">LinkedIn Profile</a>
+            </p>
+          </article>
+        </section>
       </main>
 
       <footer class="footer">
@@ -88,5 +101,6 @@
         </p>
       </footer>
     </div>
+    <script src="js/main.js"></script>
   </body>
 </html>
