@@ -1,95 +1,709 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Wail Rhazouani | Data Engineering Student</title>
-    <meta
-      name="description"
-      content="Engineering Scalable Data Architectures - terminal-centric portfolio for a Data Engineering student focused on Big Data and Cloud systems."
-    />
-    <link rel="stylesheet" href="css/styles.css" />
-  </head>
-  <body>
-    <div class="page-shell">
-      <header class="topbar">
-        <a class="brand" href="index.html">
-          <span class="brand-mark">WR</span>
-          <span>
-            <strong>Wail Rhazouani</strong>
-            <small>Data Engineering Student</small>
-          </span>
-        </a>
-        <nav class="nav">
-          <a class="active" href="index.html">Home</a>
-          <a href="bio.html">Bio</a>
-          <a href="portfolio.html">Portfolio</a>
-          <a href="elevator-pitch.html">Elevator Pitch</a>
-        </nav>
-        <p class="topbar-meta">ALT+1..4 to navigate</p>
-      </header>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wail Rhazouani — Data Engineer</title>
+<meta name="description" content="Data Engineering student specializing in distributed systems, Apache Kafka, Spark, and cloud infrastructure.">
+<meta property="og:title" content="Wail Rhazouani — Data Engineer">
+<meta property="og:description" content="Portfolio of Wail Rhazouani, Data Engineering student at EST Ibn Tofail.">
+<meta property="og:image" content="assets/photo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
-      <main class="content-wrap">
-        <section class="hero-grid">
-          <article class="panel terminal-panel">
-            <div class="panel-head">
-              <span class="dot red"></span>
-              <span class="dot amber"></span>
-              <span class="dot green"></span>
-              <p>terminal://home</p>
-            </div>
-            <div class="panel-body">
-              <p class="eyebrow">Data Engineering Portfolio</p>
-              <h1>Engineering Scalable Data Architectures.</h1>
-              <p class="summary">
-                Information Technology and Data Engineering student specializing in distributed
-                systems and cloud infrastructure. Focused on building efficient, minimalist
-                solutions for the future of data.
-              </p>
-              <div class="actions">
-                <a class="button primary" href="portfolio.html">View My Projects</a>
-                <a class="button secondary" href="assets/portfolio.pdf" target="_blank" rel="noreferrer">Download Resume</a>
-              </div>
-              <ul class="inline-tags" aria-label="Focus areas">
-                <li>Apache Kafka</li>
-                <li>Apache Spark</li>
-                <li>Hadoop Ecosystems</li>
-                <li>Cloud Engineering</li>
-              </ul>
-            </div>
-          </article>
+<div class="shell">
 
-          <aside class="panel identity-panel" aria-label="Profile and status">
-            <img class="portrait-photo" src="assets/portrait.jpeg" alt="Portrait of Wail Rhazouani" />
-            <div class="identity-copy">
-              <p class="status-line">STATUS: building real-time systems from Rabat, Morocco</p>
-              <p class="status-line">ENV: Fedora and Ubuntu, Hyprland-inspired workflow</p>
-            </div>
-            <div class="stat-grid">
-              <article>
-                <strong>Distributed First</strong>
-                <p>Designing event-driven pipelines that stay stable under load.</p>
-              </article>
-              <article>
-                <strong>Cloud Native</strong>
-                <p>Deploying practical data services with clear SLO boundaries.</p>
-              </article>
-            </div>
-          </aside>
-        </section>
-      </main>
-
-      <footer class="footer">
-        <p>Rabat, Morocco</p>
-        <p>
-          <a href="https://www.linkedin.com/in/wail-rhazouani/" target="_blank" rel="noreferrer">LinkedIn</a>
-          <span>·</span>
-          <a href="https://github.com/wailrhazouani-tech" target="_blank" rel="noreferrer">GitHub</a>
-          <span>·</span>
-          <a href="mailto:rhazouani1999@gmail.com">Email</a>
-        </p>
-      </footer>
+  <!-- ══════════ TOPBAR ══════════ -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="ws-dots" id="ws-dots"></div>
+      <span style="color:var(--muted)">wail@arch:~</span>
+      <span style="color:var(--border)">|</span>
+      <span>portfolio.sh</span>
     </div>
-    <script src="js/main.js"></script>
-  </body>
+    <div class="topbar-right">
+      <span id="mem-display">MEM 64%</span>
+      <span style="color:var(--border)">|</span>
+      <span id="cpu-display">CPU 12%</span>
+      <span style="color:var(--border)">|</span>
+      <span id="clock">--:--</span>
+      <span style="color:var(--border)">|</span>
+      <span style="cursor:pointer;color:var(--muted);user-select:none" onclick="openCmd()" title="Command Palette (Ctrl+K)">⌘K</span>
+    </div>
+  </header>
+
+  <!-- PROGRESS BAR -->
+  <div class="scroll-progress" id="scroll-progress"></div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <div class="toast-dot"></div>
+    <span id="toast-msg">Copied to clipboard</span>
+  </div>
+
+  <!-- COMMAND PALETTE -->
+  <div class="cmd-overlay" id="cmd-overlay" onclick="closeCmd(event)">
+    <div class="cmd-box" onclick="event.stopPropagation()">
+      <div class="cmd-input-row">
+        <span class="cmd-prompt">❯</span>
+        <input class="cmd-input" id="cmd-input" placeholder="Search pages, actions..." autocomplete="off" spellcheck="false">
+        <span class="cmd-hint">ESC to close</span>
+      </div>
+      <div class="cmd-results" id="cmd-results"></div>
+      <div class="cmd-footer">
+        <span class="cmd-key"><span class="kbd">↑↓</span> navigate</span>
+        <span class="cmd-key"><span class="kbd">↵</span> select</span>
+        <span class="cmd-key"><span class="kbd">ESC</span> close</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ SIDEBAR ══════════ -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-avatar"><img src="assets/photo.jpg" alt="Wail Rhazouani"></div>
+      <div class="sidebar-name">Wail Rhazouani</div>
+      <div class="sidebar-role">→ Data Engineer</div>
+      <div class="sidebar-prompt">
+        <span style="color:var(--green)">❯</span>
+        <span style="color:var(--accent)">~</span><span>/portfolio</span>
+      </div>
+    </div>
+
+    <nav>
+      <div class="nav-section">Navigation</div>
+
+      <a class="nav-item active" href="#" onclick="showPage('home',this)">
+        <i class="icon">⌂</i> home
+      </a>
+      <a class="nav-item" href="#" onclick="showPage('about',this)">
+        <i class="icon">§</i> about
+      </a>
+      <a class="nav-item" href="#" onclick="showPage('portfolio',this)">
+        <i class="icon">◈</i> projects <span class="badge">5</span>
+      </a>
+      <a class="nav-item" href="#" onclick="showPage('pitch',this)">
+        <i class="icon">▶</i> pitch
+      </a>
+
+      <div class="nav-section" style="margin-top:12px">Links</div>
+
+      <a class="nav-item" href="https://github.com/wailrhazouani-tech" target="_blank">
+        <i class="icon">⌥</i> github
+      </a>
+      <a class="nav-item" href="mailto:wail.rhazouani@uit.ac.ma">
+        <i class="icon">@</i> email
+      </a>
+      <a class="nav-item" href="assets/resume.pdf" download="Resume_Wail_Rhazouani.pdf">
+        <i class="icon">↓</i> resume.pdf
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="status-row">
+        <div class="status-dot"></div>
+        <span>available for internship</span>
+      </div>
+      <div style="margin-top:4px; color:var(--muted)">Casablanca, Morocco</div>
+    </div>
+  </aside>
+
+  <!-- ══════════ MAIN ══════════ -->
+  <main class="main" id="main">
+
+    <!-- ▌▌ HOME PAGE ▌▌ -->
+    <section class="page active" id="page-home">
+      <div class="hero">
+        <div class="hero-photo-card">
+          <img class="hero-photo-img" src="assets/photo.jpg" alt="Wail Rhazouani">
+          <div class="hero-photo-badge"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;box-shadow:0 0 6px var(--green)"></span> available</div>
+        </div>
+        <div class="hero-prompt fade-up">~/portfolio $ ./init --engineer data</div>
+
+        <h1 class="hero-headline fade-up">
+          Engineering<br>
+          <span class="hl-green">Scalable</span> Data<br>
+          <span class="hl-accent">Architectures.</span>
+        </h1>
+
+        <p class="hero-sub fade-up">
+          Information Technology and Data Engineering student specializing in
+          distributed systems and cloud infrastructure. Focused on building
+          efficient, minimalist solutions for the future of data.
+        </p>
+
+        <div class="hero-ctas fade-up">
+          <a class="btn btn-primary" href="#" onclick="showPage('portfolio', document.querySelector('[onclick*=portfolio]'))">
+            <span>◈</span> View Projects
+          </a>
+          <a class="btn btn-outline" href="assets/resume.pdf" download="Resume_Wail_Rhazouani.pdf">
+            <span>↓</span> Resume.pdf
+          </a>
+          <a class="btn btn-outline" href="#" onclick="showPage('pitch', document.querySelector('[onclick*=pitch]'))">
+            <span>▶</span> Elevator Pitch
+          </a>
+        </div>
+
+        <div class="stats-row fade-up">
+          <div class="stat">
+            <div class="stat-val">8+</div>
+            <div class="stat-label">Courses Active</div>
+          </div>
+          <div class="stat">
+            <div class="stat-val">5</div>
+            <div class="stat-label">Major Projects</div>
+          </div>
+          <div class="stat">
+            <div class="stat-val">3</div>
+            <div class="stat-label">Cloud Deploys</div>
+          </div>
+          <div class="stat">
+            <div class="stat-val">∞</div>
+            <div class="stat-label">Commits</div>
+          </div>
+        </div>
+
+        <div class="term-prompt-line fade-up">
+          <span class="term-prompt-ps">wail@arch ~</span>
+          <span>$</span>
+          <span id="typewriter"></span>
+          <span class="cursor"></span>
+        </div>
+      </div>
+
+      <div class="sec-header">
+        <span class="sec-title">Core Stack</span>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="tile-grid">
+        <div class="tile">
+          <div class="tile-tag">streaming</div>
+          <div class="tile-title">Apache Kafka</div>
+          <div class="tile-desc">KRaft-mode cluster management, topic partitioning, consumer group offsets, real-time pipeline design.</div>
+          <div class="tile-footer">
+            <span class="chip green">Producer</span>
+            <span class="chip green">Consumer</span>
+            <span class="chip">KRaft</span>
+          </div>
+        </div>
+        <div class="tile">
+          <div class="tile-tag">processing</div>
+          <div class="tile-title">Apache Spark</div>
+          <div class="tile-desc">PySpark DataFrames, ALS recommendation systems, large-scale distributed batch processing.</div>
+          <div class="tile-footer">
+            <span class="chip accent">PySpark</span>
+            <span class="chip">MLlib</span>
+            <span class="chip">ALS</span>
+          </div>
+        </div>
+        <div class="tile">
+          <div class="tile-tag">cloud</div>
+          <div class="tile-title">Cloud Infra</div>
+          <div class="tile-desc">DigitalOcean PaaS & IaaS deployments, FastAPI + MongoDB, systemd service management.</div>
+          <div class="tile-footer">
+            <span class="chip yellow">DigitalOcean</span>
+            <span class="chip">FastAPI</span>
+            <span class="chip">MongoDB</span>
+          </div>
+        </div>
+        <div class="tile">
+          <div class="tile-tag">containers</div>
+          <div class="tile-title">Podman / Docker</div>
+          <div class="tile-desc">Rootless containers, Containerfile design patterns, systemd integration, pod orchestration.</div>
+          <div class="tile-footer">
+            <span class="chip orange">Podman</span>
+            <span class="chip">Rootless</span>
+            <span class="chip">systemd</span>
+          </div>
+        </div>
+        <div class="tile">
+          <div class="tile-tag">ml / ai</div>
+          <div class="tile-title">ML from Scratch</div>
+          <div class="tile-desc">MLP, CNN, RNN/LSTM/GRU, Transformer Encoder built in pure NumPy with full backpropagation.</div>
+          <div class="tile-footer">
+            <span class="chip purple">NumPy</span>
+            <span class="chip purple">Transformers</span>
+            <span class="chip">Matplotlib</span>
+          </div>
+        </div>
+        <div class="tile">
+          <div class="tile-tag">blockchain</div>
+          <div class="tile-title">Web3 / Solidity</div>
+          <div class="tile-desc">8-contract dApp with React + Web3.js frontend. Full smart-contract architecture on EVM.</div>
+          <div class="tile-footer">
+            <span class="chip cyan">Solidity</span>
+            <span class="chip cyan">Web3.js</span>
+            <span class="chip">React</span>
+          </div>
+        </div>
+      </div>
+      <div style="margin:20px;background:linear-gradient(135deg,rgba(88,166,255,.08),rgba(63,185,80,.06));border:1px solid var(--accent);border-radius:4px;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px">Available for Junior Data / Cloud Engineer roles</div>
+          <div style="font-size:11px;color:var(--muted)">Open to internship and full-time positions · Morocco and Remote</div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn btn-primary" href="mailto:wail.rhazouani@uit.ac.ma">@ Hire Me</a>
+          <a class="btn btn-outline" href="assets/resume.pdf" download="Resume_Wail_Rhazouani.pdf">&#8595; Resume</a>
+        </div>
+      </div>
+      <div class="sec-header" style="margin-top:8px">
+        <span class="sec-title">Contact</span>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="contact-grid">
+        <a class="contact-item" href="mailto:wail.rhazouani@uit.ac.ma">
+          <span class="contact-item-icon">@</span>
+          <span class="contact-item-label">Email</span>
+          <span class="contact-item-val">wail.rhazouani@uit.ac.ma</span>
+        </a>
+        <a class="contact-item" href="https://github.com/wailrhazouani-tech" target="_blank">
+          <span class="contact-item-icon">⌥</span>
+          <span class="contact-item-label">GitHub</span>
+          <span class="contact-item-val">wailrhazouani-tech</span>
+        </a>
+        <a class="contact-item" href="https://wailrhazouani-tech.github.io/Portfolio/" target="_blank">
+          <span class="contact-item-icon">⬡</span>
+          <span class="contact-item-label">Portfolio</span>
+          <span class="contact-item-val">github.io/Portfolio</span>
+        </a>
+        <a class="contact-item" href="https://www.linkedin.com/in/wail-rhazouani" target="_blank">
+          <span class="contact-item-icon">in</span>
+          <span class="contact-item-label">LinkedIn</span>
+          <span class="contact-item-val">wail-rhazouani</span>
+        </a>
+        <a class="contact-item" href="tel:+212672236331">
+          <span class="contact-item-icon">☏</span>
+          <span class="contact-item-label">Phone</span>
+          <span class="contact-item-val">+212 672 236 331</span>
+        </a>
+      </div>
+
+    </section>
+    <section class="page" id="page-about">
+
+      <div class="term-window">
+        <div class="term-titlebar">
+          <div class="term-btn red"></div>
+          <div class="term-btn yellow"></div>
+          <div class="term-btn green"></div>
+          <span class="term-title">about.md — nvim</span>
+        </div>
+        <div class="term-body">
+          <div style="color:var(--muted);font-size:12px;line-height:1.8">
+            <span style="color:var(--purple)">##</span> <span style="color:var(--text);font-weight:700">Wail Rhazouani</span><br>
+            <span style="color:var(--muted)">IT & Data Engineering Student @ UMI — Meknès, Morocco</span><br><br>
+            <span style="color:var(--green)">→</span> <strong style="color:var(--text)">Mission:</strong> Bridge the Morocco youth employment gap through technical excellence in data infrastructure.<br>
+            <span style="color:var(--green)">→</span> <strong style="color:var(--text)">Focus:</strong> Distributed systems, cloud architecture, and scalable data pipelines.<br>
+            <span style="color:var(--green)">→</span> <strong style="color:var(--text)">Philosophy:</strong> Minimalism in code. Precision in design. Depth in understanding.
+          </div>
+        </div>
+      </div>
+
+      <div class="about-layout">
+
+        <div class="about-photo-block">
+          <img class="about-photo" src="assets/photo.jpg" alt="Wail Rhazouani">
+          <div class="about-photo-meta">
+            <div class="about-photo-name">Wail Rhazouani</div>
+            <div class="about-photo-title">→ Data Engineer</div>
+            <div style="font-size:10px;color:var(--muted)">EST Ibn Tofail, Kenitra</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center">
+            <span class="chip green">Open to work</span>
+            <span class="chip accent">Junior DE</span>
+          </div>
+        </div>
+
+        <div class="about-block">
+          <div class="block-label">Narrative</div>
+          <div class="block-text">
+            As an IT and Data Engineering student in Morocco, I've oriented my technical path around a clear problem: <strong>scaling human potential through data infrastructure</strong>. Morocco's youth unemployment gap is not a resource problem — it's an information and systems problem.<br><br>
+            My work on <strong>JobBridge MA</strong>, a university-to-job bridge platform, directly targets this. By combining distributed systems knowledge with product thinking, I aim to build pipelines that don't just move data — they create opportunity.<br><br>
+            Every system I build is designed to be <strong>efficient, observable, and minimal</strong>. No unnecessary abstractions. Clean interfaces. Solid foundations.
+          </div>
+        </div>
+
+        <div class="about-block">
+          <div class="block-label">Skills Proficiency</div>
+          <div class="skill-item">
+            <div class="skill-header"><span>Python</span><span class="skill-pct">92%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span>Apache Kafka</span><span class="skill-pct">80%</span></div>
+            <div class="skill-bar"><div class="skill-fill green" style="width:80%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span>SQL / Oracle DB</span><span class="skill-pct">78%</span></div>
+            <div class="skill-bar"><div class="skill-fill yellow" style="width:78%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span>PySpark</span><span class="skill-pct">75%</span></div>
+            <div class="skill-bar"><div class="skill-fill orange" style="width:75%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span>Linux / Shell</span><span class="skill-pct">88%</span></div>
+            <div class="skill-bar"><div class="skill-fill cyan" style="width:88%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header"><span>NumPy / ML</span><span class="skill-pct">82%</span></div>
+            <div class="skill-bar"><div class="skill-fill purple" style="width:82%"></div></div>
+          </div>
+        </div>
+
+        <div class="about-block">
+          <div class="block-label">Environment</div>
+          <div class="block-text" style="display:grid;grid-template-columns:1fr 1fr;gap:6px 0">
+            <span style="color:var(--muted)">OS</span>         <span style="color:var(--green)">Fedora 43</span>
+            <span style="color:var(--muted)">Shell</span>      <span style="color:var(--green)">Zsh + Oh-My-Zsh</span>
+            <span style="color:var(--muted)">Editor</span>     <span style="color:var(--green)">VS Code / nvim</span>
+            <span style="color:var(--muted)">WM</span>         <span style="color:var(--green)">GNOME</span>
+            <span style="color:var(--muted)">Containers</span> <span style="color:var(--green)">Podman (rootless)</span>
+            <span style="color:var(--muted)">Font</span>       <span style="color:var(--green)">JetBrains Mono</span>
+            <span style="color:var(--muted)">Theme</span>      <span style="color:var(--green)">Dark / Dracula</span>
+            <span style="color:var(--muted)">GPU</span>        <span style="color:var(--green)">AMD (open driver)</span>
+          </div>
+        </div>
+
+        <div class="about-block">
+          <div class="block-label">Beyond the Terminal</div>
+          <div class="block-text" style="margin-bottom:14px">
+            A practitioner of <strong>combat sports</strong> — Muay Thai striking and grappling. The same principles apply: constant iteration, reading the opponent (problem), and precision over brute force.
+          </div>
+          <div class="interest-row">
+            <div class="interest-pill">🥊 Muay Thai</div>
+            <div class="interest-pill">🤼 Grappling</div>
+            <div class="interest-pill">📖 Quran Hifz</div>
+            <div class="interest-pill">🐚 Terminal UX</div>
+            <div class="interest-pill">☁️ Cloud Infra</div>
+            <div class="interest-pill">⚡ Tiling WMs</div>
+          </div>
+        </div>
+
+        <div class="about-block full">
+          <div class="block-label">Education & Training</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px">
+
+            <div style="border:1px solid var(--border);border-radius:3px;padding:14px">
+              <div style="font-size:11px;color:var(--accent);margin-bottom:4px">2023 → Present</div>
+              <div style="font-size:13px;font-weight:700;color:var(--text)">UMI — Meknès</div>
+              <div style="font-size:11px;color:var(--muted);margin-top:4px">IT & Data Engineering (MUS) — Big Data, Cloud, Deep Learning, Blockchain, Applied Statistics</div>
+            </div>
+
+            <div style="border:1px solid var(--border);border-radius:3px;padding:14px">
+              <div style="font-size:11px;color:var(--green);margin-bottom:4px">2024 → Present</div>
+              <div style="font-size:13px;font-weight:700;color:var(--text)">ALX Africa</div>
+              <div style="font-size:11px;color:var(--muted);margin-top:4px">Professional Foundations Program — GCGO Team Projects, Entrepreneurship, Presentation Skills</div>
+            </div>
+
+            <div style="border:1px solid var(--border);border-radius:3px;padding:14px">
+              <div style="font-size:11px;color:var(--yellow);margin-bottom:4px">Self-Directed</div>
+              <div style="font-size:13px;font-weight:700;color:var(--text)">Open Source & Docs</div>
+              <div style="font-size:11px;color:var(--muted);margin-top:4px">Apache Kafka docs, DigitalOcean tutorials, Podman rootless guide, Anthropic APIs</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ▌▌ PORTFOLIO PAGE ▌▌ -->
+    <section class="page" id="page-portfolio">
+
+      <!-- Featured -->
+      <div class="sec-header">
+        <span class="sec-title">Featured Project</span>
+        <div class="sec-line"></div>
+      </div>
+
+      <div class="featured-project">
+        <div class="term-titlebar" style="background:var(--bg3);border-bottom:1px solid var(--border)">
+          <div class="term-btn red"></div>
+          <div class="term-btn yellow"></div>
+          <div class="term-btn green"></div>
+          <span class="term-title">ml-streamlit-app / main.py</span>
+        </div>
+        <div class="featured-body">
+          <div class="featured-info">
+            <div class="tile-tag">full-stack · ml</div>
+            <div class="tile-title" style="font-size:18px;margin-bottom:12px">Full-Stack ML App<br>with Streamlit + Scikit-learn</div>
+            <div class="block-text" style="margin-bottom:16px">
+              An end-to-end machine learning web application enabling non-technical users to train, evaluate, and deploy classification models through a clean browser interface — no code required.
+            </div>
+            <div style="margin-bottom:12px">
+              <div class="proj-section-label">Why Built</div>
+              <div style="font-size:11px;color:var(--muted);line-height:1.7">
+                To democratize ML experimentation — data teams needed a rapid prototyping tool without standing up a full MLflow/Airflow stack for every experiment.
+              </div>
+            </div>
+            <div style="margin-bottom:12px">
+              <div class="proj-section-label">Key Challenge</div>
+              <div style="font-size:11px;color:var(--muted);line-height:1.7">
+                Balancing model retraining latency with Streamlit's session state model — stateless HTTP re-renders conflicted with long-running scikit-learn fit() calls.
+              </div>
+            </div>
+            <div style="margin-bottom:16px">
+              <div class="proj-section-label">Solution</div>
+              <div style="font-size:11px;color:var(--muted);line-height:1.7">
+                Implemented @st.cache_resource for model persistence across sessions and joblib serialization for on-demand model persistence to disk.
+              </div>
+            </div>
+            <div class="tile-footer" style="border-top:1px solid var(--border)">
+              <span class="chip green">Streamlit</span>
+              <span class="chip purple">Scikit-learn</span>
+              <span class="chip accent">Python</span>
+              <span class="chip">pandas</span>
+              <span class="chip">joblib</span>
+            </div>
+          </div>
+          <div class="featured-visual">
+            <div class="block-label">Source Snippet</div>
+            <div class="code-block">
+<span class="c-comment"># app.py — model pipeline</span>
+<span class="c-keyword">import</span> streamlit <span class="c-keyword">as</span> st
+<span class="c-keyword">from</span> sklearn.pipeline <span class="c-keyword">import</span> Pipeline
+<span class="c-keyword">from</span> sklearn.preprocessing <span class="c-keyword">import</span> StandardScaler
+
+<span class="c-comment"># Cache model across sessions</span>
+@st.<span class="c-func">cache_resource</span>
+<span class="c-keyword">def</span> <span class="c-func">build_pipeline</span>(algo):
+    <span class="c-keyword">return</span> Pipeline([
+        (<span class="c-string">'scaler'</span>, StandardScaler()),
+        (<span class="c-string">'clf'</span>, algo)
+    ])
+
+<span class="c-comment"># Fit on upload</span>
+<span class="c-keyword">if</span> file := st.<span class="c-func">file_uploader</span>(
+    <span class="c-string">"Upload CSV"</span>
+):
+    X, y = <span class="c-func">load_data</span>(file)
+    pipe = <span class="c-func">build_pipeline</span>(clf)
+    pipe.<span class="c-func">fit</span>(X, y)
+    st.<span class="c-func">success</span>(<span class="c-string">f"Accuracy: {acc:.2%}"</span>)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project List -->
+      <div class="sec-header" style="margin-top:8px">
+        <span class="sec-title">All Projects</span>
+        <div class="sec-line"></div>
+      </div>
+
+      <!-- ── JOBBRIDGE MODAL ────────────────────────── -->
+      <div id="jb-modal"
+           style="display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.85);
+                  backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px;
+                  opacity:0;transition:opacity .2s ease"
+           onclick="if(event.target===this)closeJobBridgeModal()">
+        <div style="width:100%;max-width:920px;background:var(--bg2);border:1px solid var(--border);
+                    border-radius:6px;overflow:hidden;display:flex;flex-direction:column;max-height:90vh;
+                    box-shadow:0 32px 80px rgba(0,0,0,.8)">
+
+          <!-- Modal titlebar -->
+          <div style="background:var(--bg3);padding:10px 16px;display:flex;align-items:center;
+                      justify-content:space-between;border-bottom:1px solid var(--border);flex-shrink:0">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="width:10px;height:10px;border-radius:50%;background:#f85149;display:inline-block"></span>
+              <span style="width:10px;height:10px;border-radius:50%;background:#d29922;display:inline-block"></span>
+              <span style="width:10px;height:10px;border-radius:50%;background:#3fb950;display:inline-block"></span>
+              <span style="font-size:11px;color:var(--muted);margin-left:8px;font-family:inherit">
+                JobBridge_Presentation.pdf &mdash; viewer
+              </span>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <a href="assets/jobbridge-deck.pdf" download="JobBridge_Presentation.pdf"
+                 style="font-size:11px;color:var(--accent);text-decoration:none;padding:3px 10px;
+                        border:1px solid var(--accent);border-radius:2px;font-family:inherit">
+                &#8595; Download
+              </a>
+              <a href="https://youtu.be/ENykSc-ZdmE" target="_blank"
+                 style="font-size:11px;color:var(--green);text-decoration:none;padding:3px 10px;
+                        border:1px solid var(--green);border-radius:2px;font-family:inherit">
+                &#9654; YouTube
+              </a>
+              <span onclick="closeJobBridgeModal()"
+                    style="cursor:pointer;color:var(--muted);font-size:18px;line-height:1;
+                           padding:0 4px;border-radius:2px;font-family:inherit"
+                    title="Close (ESC)">&#x2715;</span>
+            </div>
+          </div>
+
+          <!-- Tab bar -->
+          <div style="display:flex;border-bottom:1px solid var(--border);flex-shrink:0;background:var(--bg2)">
+            <button id="tab-pdf" onclick="switchJBTab('pdf')" data-active="true"
+              style="font-family:inherit;padding:9px 20px;font-size:11px;cursor:pointer;
+                     background:none;border:none;border-bottom:2px solid var(--accent);
+                     color:var(--accent)">
+              &#128196; Slide Deck (13 slides)
+            </button>
+            <button id="tab-video" onclick="switchJBTab('video')"
+              style="font-family:inherit;padding:9px 20px;font-size:11px;cursor:pointer;
+                     background:none;border:none;border-bottom:2px solid transparent;
+                     color:var(--muted)">
+              &#9654; Pitch Video
+            </button>
+            <div style="flex:1;display:flex;align-items:center;justify-content:flex-end;
+                        padding-right:16px;font-size:10px;color:var(--muted)">
+              Team: Younes &middot; Zineb &middot; Wail &middot; Salma &nbsp;|&nbsp; ALX GCGO 2024
+            </div>
+          </div>
+
+          <!-- PDF pane -->
+          <div id="jb-pane-pdf" style="flex:1;overflow:hidden;min-height:0">
+            <iframe src="assets/jobbridge-deck.pdf#toolbar=1&view=FitH"
+                    style="width:100%;height:100%;min-height:560px;border:none;display:block"
+                    title="JobBridge Presentation Deck">
+            </iframe>
+          </div>
+
+          <!-- Video pane -->
+          <div id="jb-pane-video"
+               style="display:none;flex:1;align-items:center;justify-content:center;
+                      padding:24px;background:var(--bg);min-height:420px">
+            <div style="width:100%;max-width:760px">
+              <div style="aspect-ratio:16/9;background:var(--bg2);border-radius:4px;overflow:hidden">
+                <iframe id="jb-yt-iframe"
+                        src=""
+                        data-src="https://www.youtube.com/embed/ENykSc-ZdmE?rel=0&modestbranding=1&color=white&autoplay=1"
+                        style="width:100%;height:100%;border:none;display:block"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        title="JobBridge Pitch Video">
+                </iframe>
+              </div>
+              <div style="margin-top:10px;font-size:11px;color:var(--muted);text-align:center">
+                JobBridge MA &mdash; ALX GCGO Elevator Pitch &nbsp;&middot;&nbsp;
+                <a href="https://youtu.be/ENykSc-ZdmE" target="_blank"
+                   style="color:var(--accent);text-decoration:none">youtu.be/ENykSc-ZdmE</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="projects-list"></div>
+
+    </section>
+
+    <!-- ▌▌ PITCH PAGE ▌▌ -->
+    <section class="page" id="page-pitch">
+
+      <div class="term-window">
+        <div class="term-titlebar">
+          <div class="term-btn red"></div>
+          <div class="term-btn yellow"></div>
+          <div class="term-btn green"></div>
+          <span class="term-title">pitch.mp4 — mpv --no-border</span>
+        </div>
+        <div class="term-body" style="padding:14px 18px">
+          <div style="font-size:12px;color:var(--muted)">
+            <span style="color:var(--green)">▶</span>
+            <span style="color:var(--accent)"> JobBridge MA</span>
+            — Investor Pitch · ALX GCGO 2024
+            <span style="float:right;color:var(--muted)">3:00 / 3:00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pitch-layout">
+        <div class="pitch-video-area">
+          <div class="block-label">Pitch Video</div>
+          <div class="video-container">
+            <iframe 
+              src="https://www.youtube.com/embed/ENykSc-ZdmE?rel=0&modestbranding=1&color=white&theme=dark"
+              title="JobBridge MA — Elevator Pitch"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              style="border:none">
+            </iframe>
+          </div>
+          <div style="margin-top:10px;display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted)">
+            <span style="color:var(--green)">▶</span>
+            <a href="https://youtu.be/ENykSc-ZdmE" target="_blank" style="color:var(--accent);text-decoration:none">youtu.be/ENykSc-ZdmE</a>
+            <span>· ALX GCGO 2024 · Team "Eclectic Innovators"</span>
+          </div>
+        </div>
+
+        <div class="pitch-sidebar">
+          <div class="block-label">Key Takeaways</div>
+
+          <div class="takeaway-item">
+            <div class="takeaway-num">01</div>
+            <div>
+              <strong style="color:var(--text);display:block;margin-bottom:2px">The Problem</strong>
+              Morocco's 32% youth unemployment rate represents a systemic data-matching failure — universities produce graduates that employers cannot efficiently find or assess.
+            </div>
+          </div>
+
+          <div class="takeaway-item">
+            <div class="takeaway-num">02</div>
+            <div>
+              <strong style="color:var(--text);display:block;margin-bottom:2px">The Solution</strong>
+              JobBridge MA: A University-to-Job Bridge Platform aggregating structured graduate profiles, verified skills, and employer demand signals in one searchable system.
+            </div>
+          </div>
+
+          <div class="takeaway-item">
+            <div class="takeaway-num">03</div>
+            <div>
+              <strong style="color:var(--text);display:block;margin-bottom:2px">Technical Moat</strong>
+              Built on a distributed data pipeline: Kafka for real-time job postings ingestion, Spark for matching algorithms, and a FastAPI backend with MongoDB for flexible schema evolution.
+            </div>
+          </div>
+
+          <div class="takeaway-item">
+            <div class="takeaway-num">04</div>
+            <div>
+              <strong style="color:var(--text);display:block;margin-bottom:2px">Market Opportunity</strong>
+              2.3M Moroccan university students. 40+ universities with no standardized digital profile system. First-mover advantage in structured graduate data infrastructure.
+            </div>
+          </div>
+
+          <div class="takeaway-item">
+            <div class="takeaway-num">05</div>
+            <div>
+              <strong style="color:var(--text);display:block;margin-bottom:2px">Ask</strong>
+              Seeking mentorship, pilot university partnerships, and seed-stage technical co-founders to validate the data pipeline MVP with real cohorts.
+            </div>
+          </div>
+
+          <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border)">
+            <div class="tile-footer" style="padding:0;margin-bottom:12px">
+              <span class="chip accent">Kafka</span>
+              <span class="chip purple">PySpark</span>
+              <span class="chip green">FastAPI</span>
+              <span class="chip yellow">MongoDB</span>
+              <span class="chip">ALX GCGO</span>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="btn btn-primary" href="mailto:jobbridgema@gmail.com">@ Contact Team</a>
+              <a class="btn btn-outline" href="https://youtu.be/ENykSc-ZdmE" target="_blank">&#9654; Watch on YouTube</a>
+            </div>
+          </div>
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn btn-primary" href="mailto:jobbridgema@gmail.com">@ Contact Team</a>
+          <a class="btn btn-outline" href="https://youtu.be/ENykSc-ZdmE" target="_blank">▶ Watch on YouTube</a>
+        </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+</div>
+
+
+<script src="js/main.js"></script>
+</body>
 </html>
