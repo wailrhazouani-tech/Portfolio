@@ -94,7 +94,7 @@ const projects = [
     num: '01',
     name: 'JobBridge MA — University-to-Job Platform',
     type: 'full-stack · data pipeline · ALX GCGO',
-    purpose: "Address Morocco's 38% youth unemployment (ages 15-24) through an AI-powered three-sided platform connecting students, universities, and companies. Built with team 'Eclectic Innovators' for ALX GCGO 2024.",
+    purpose: "Address Morocco's 38% youth unemployment (ages 15-24) through an AI-powered three-sided platform connecting students, universities, and companies. Built with team 'Eclectic Innovators' for ALX GCGO 2026.",
     challenge: 'Schema-flexible database for 40+ university formats; real-time job ingestion handling bursty traffic; aligning three distinct stakeholder groups; cold-start matching for new graduate profiles.',
     solution: 'MongoDB for graduate profiles; Kafka KRaft for job posting streams; PySpark ALS nightly matching; FastAPI on DigitalOcean. Features: AI job matching, skill-gap analysis dashboard, verified talent profiles, mentor network.',
     chips: [{ l: 'Kafka', c: 'accent' }, { l: 'PySpark', c: 'purple' }, { l: 'FastAPI', c: 'green' }, { l: 'MongoDB', c: 'yellow' }, { l: 'ALX GCGO', c: '' }],
